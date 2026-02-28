@@ -1,6 +1,6 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
-import { translateRequestSchema, type TranslateRequest } from '../schemas';
-import { translateArticle } from '../services/translation';
+import { translateRequestSchema, type TranslateRequest } from '../schemas.js';
+import { translateArticle } from '../services/translation.js';
 
 interface TranslateRequestBody {
   text: string;
@@ -21,7 +21,7 @@ export async function translateHandler(
     
     if (!validationResult.success) {
       const errors = validationResult.error.errors
-        .map((err) => `${err.path.join('.')}: ${err.message}`)
+        .map((err: { path: (string | number)[]; message: string }) => `${err.path.join('.')}: ${err.message}`)
         .join(', ');
       
       await reply.code(400).send({

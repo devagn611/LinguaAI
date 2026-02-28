@@ -1,7 +1,7 @@
 import Fastify, { type FastifyRequest, type FastifyReply } from 'fastify';
 import cors from '@fastify/cors';
 import dotenv from 'dotenv';
-import { registerTranslateRoute } from './routes/translate';
+import { registerTranslateRoute } from './routes/translate.js';
 
 dotenv.config();
 

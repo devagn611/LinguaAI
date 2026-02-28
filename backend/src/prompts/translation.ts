@@ -1,5 +1,5 @@
 import { ChatPromptTemplate } from '@langchain/core/prompts';
-import type { TranslateRequest } from '../schemas';
+import type { TranslateRequest } from '../schemas.js';
 
 const LANGUAGE_NAMES: Record<string, string> = {
   en: 'English', de: 'German', nl: 'Dutch', fr: 'French', es: 'Spanish',

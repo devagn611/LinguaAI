@@ -1,9 +1,9 @@
 import { StructuredOutputParser } from '@langchain/core/output_parsers';
 import type { BaseChatModel } from '@langchain/core/language_models/chat_models';
-import type { TranslateRequest, TranslateResponse, LLMOutput } from '../schemas';
-import { llmOutputSchema } from '../schemas';
-import { createTranslationPrompt } from '../prompts/translation';
-import { createModel } from '../providers/factory';
+import type { TranslateRequest, TranslateResponse, LLMOutput } from '../schemas.js';
+import { llmOutputSchema } from '../schemas.js';
+import { createTranslationPrompt } from '../prompts/translation.js';
+import { createModel } from '../providers/factory.js';
 
 /**
  * Cost per million tokens (as of 2024, update as needed)
@@ -158,7 +158,7 @@ export async function translateArticle(
       );
       
       const missingLanguages = request.targetLanguages.filter(
-        (lang) => !translations[lang.toLowerCase()] || translations[lang.toLowerCase()].trim() === ''
+        (lang: string) => !translations[lang.toLowerCase()] || translations[lang.toLowerCase()].trim() === ''
       );
       
       if (missingLanguages.length > 0 && attempt < maxRetries) {
@@ -174,7 +174,7 @@ export async function translateArticle(
         const estimatedInputTokens = Math.ceil((request.text.length + 200) / 4); // ~200 chars for prompt overhead
         const estimatedOutputTokens = Math.ceil(JSON.stringify(result.translations).length / 4);
         const providerCosts = COST_PER_MILLION_TOKENS[request.provider];
-        const modelCosts = providerCosts[modelName as keyof typeof providerCosts] || providerCosts.default;
+        const modelCosts = (providerCosts[modelName as keyof typeof providerCosts] as { input: number; output: number }) || providerCosts.default;
         const estimatedCostUsd = 
           (estimatedInputTokens / 1_000_000) * modelCosts.input +
           (estimatedOutputTokens / 1_000_000) * modelCosts.output;
@@ -187,7 +187,7 @@ export async function translateArticle(
       } else {
         const formattedMessages = await prompt.formatMessages({});
         const fullInputText = formattedMessages
-          .map((msg) => (typeof msg.content === 'string' ? msg.content : JSON.stringify(msg.content)))
+          .map((msg: { content?: string | unknown }) => (typeof msg.content === 'string' ? msg.content : JSON.stringify(msg.content)))
           .join('\n');
         const fullOutputText = JSON.stringify(result.translations);
         

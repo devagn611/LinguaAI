@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { translateRequestSchema, type TranslateRequest } from '../src/schemas';
-import { translateArticle } from '../src/services/translation';
+import { translateRequestSchema, type TranslateRequest } from '../src/schemas.js';
+import { translateArticle } from '../src/services/translation.js';
 
 /**
  * POST /api/translate handler for Vercel serverless function
@@ -27,7 +27,7 @@ export default async function handler(
     
     if (!validationResult.success) {
       const errors = validationResult.error.errors
-        .map((err) => `${err.path.join('.')}: ${err.message}`)
+        .map((err: { path: (string | number)[]; message: string }) => `${err.path.join('.')}: ${err.message}`)
         .join(', ');
       
       res.status(400).json({
