@@ -34,14 +34,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# compiled javascript files (keep only .ts source files)
-# Exclude compiled JS files in api directories
-**/api/*.js
-**/api/*.js.map
-**/api/*.d.ts
-**/api/*.d.ts.map
-
-# build outputs
-*dist*
-*.js.map

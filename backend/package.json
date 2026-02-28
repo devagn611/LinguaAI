@@ -1,0 +1,37 @@
+{
+  "name": "ai-translator",
+  "version": "1.0.0",
+  "description": "Production-grade backend service for translating articles using OpenAI or Google Gemini APIs",
+  "main": "dist/src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/src/index.js",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "translation",
+    "llm",
+    "openai",
+    "gemini",
+    "langchain"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/cors": "^10.0.0",
+    "@langchain/core": "^0.3.0",
+    "@langchain/google-genai": "^0.1.0",
+    "@langchain/openai": "^0.3.0",
+    "dotenv": "^16.4.5",
+    "fastify": "^5.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@vercel/node": "^3.0.0",
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.0"
+  }
+}
