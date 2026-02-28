@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
+    "build": "npm run build:src && npm run build:api",
+    "build:src": "tsc --project tsconfig.src.json",
+    "build:api": "tsc api/translate.ts api/health.ts --outDir dist --module ES2022 --target ES2018 --moduleResolution node --esModuleInterop --resolveJsonModule --skipLibCheck --allowSyntheticDefaultImports --declaration false --sourceMap false --rootDir .",
     "start": "node dist/index.js",
     "type-check": "tsc --noEmit"
   },

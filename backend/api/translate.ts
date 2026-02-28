@@ -1,5 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+// @ts-ignore - dist files are created during build, imports will be ../src/ in dist folder
 import { translateRequestSchema, type TranslateRequest } from '../src/schemas.js';
+// @ts-ignore - dist files are created during build, imports will be ../src/ in dist folder
 import { translateArticle } from '../src/services/translation.js';
 
 /**
