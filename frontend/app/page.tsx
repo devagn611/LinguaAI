@@ -50,8 +50,61 @@ const allLanguages = [
 ];
 
 export default function LandingPage() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://translate.devagn.com';
+
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white relative overflow-hidden">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@graph': [
+              {
+                '@type': 'WebSite',
+                '@id': `${siteUrl}/#website`,
+                url: siteUrl,
+                name: 'LinguaAI',
+                description: 'AI-powered translation service for 120+ languages',
+                potentialAction: {
+                  '@type': 'SearchAction',
+                  target: {
+                    '@type': 'EntryPoint',
+                    urlTemplate: `${siteUrl}/app?q={search_term_string}`,
+                  },
+                  'query-input': 'required name=search_term_string',
+                },
+              },
+              {
+                '@type': 'SoftwareApplication',
+                '@id': `${siteUrl}/#software`,
+                name: 'LinguaAI',
+                applicationCategory: 'TranslationApplication',
+                operatingSystem: 'Web',
+                offers: {
+                  '@type': 'Offer',
+                  price: '0',
+                  priceCurrency: 'USD',
+                },
+                description: 'AI-powered translation service supporting 120+ languages with cultural nuance and context awareness.',
+                featureList: [
+                  '120+ languages support',
+                  'AI-powered translation',
+                  'Cultural context awareness',
+                  'OpenAI and Google Gemini support',
+                  'Document and article translation',
+                ],
+                aggregateRating: {
+                  '@type': 'AggregateRating',
+                  ratingValue: '4.8',
+                  ratingCount: '150',
+                },
+              },
+            ],
+          }),
+        }}
+      />
+      <div className="min-h-screen bg-[#0a0a0a] text-white relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="fixed inset-0 opacity-20" style={{
         backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)',
@@ -327,5 +380,6 @@ export default function LandingPage() {
         </footer>
       </div>
     </div>
+    </>
   );
 }

@@ -50,7 +50,34 @@ export default function AppPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white relative overflow-hidden">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebApplication',
+            name: 'LinguaAI Translation App',
+            url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://translate.devagn.com'}/app`,
+            applicationCategory: 'TranslationApplication',
+            operatingSystem: 'Web',
+            description: 'AI-powered translation tool for translating articles, documents, and content across 120+ languages.',
+            featureList: [
+              'Translate to 120+ languages',
+              'AI-powered translation with OpenAI and Google Gemini',
+              'Cultural context awareness',
+              'Document and article translation',
+              'Real-time translation',
+            ],
+            offers: {
+              '@type': 'Offer',
+              price: '0',
+              priceCurrency: 'USD',
+            },
+          }),
+        }}
+      />
+      <div className="min-h-screen bg-[#0a0a0a] text-white relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="fixed inset-0 opacity-20" style={{
         backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)',
@@ -141,5 +168,6 @@ export default function AppPage() {
         </main>
       </div>
     </div>
+    </>
   );
 }
